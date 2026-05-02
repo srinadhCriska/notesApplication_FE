@@ -1,0 +1,75 @@
+.each-notes-bg-container{
+   background-color: #f5f2f2;
+   width: 100vw;
+   min-height:90vh;
+   height: 100%;
+   padding: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.each-notes-box{
+    width: 80%;
+    /* height:80%; */
+    border-radius: 20px;
+    /* border: solid 2px red; */
+    padding:25px;
+    display: flex;
+    flex-direction: column;
+   background-color: #fff;
+   gap: 20px;
+}
+.edit-titles-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.notes-title{
+    color: rgb(65, 64, 64);
+    font-size: 27px;
+    font-weight: 600;
+    margin: 0px;
+}
+.date{
+     color: rgb(169, 167, 167);
+     font-size: 17px;
+    font-weight: 500;
+    margin: 0px;
+}
+.title-box{
+    width: 100%;
+    height:60px;
+    outline: none;
+    font-size: 20px;
+    font-weight: 400;
+    padding:20px;
+    border: none;
+    color: black;
+    border: 1px solid rgb(181, 179, 179);
+  border-radius: 10px;
+}
+textarea{
+    width: 100%;
+    min-height:430px;
+    padding:20px;
+    font-size: 18px;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  color: black;
+  border: 1px solid rgb(181, 179, 179);
+  border-radius: 10px;
+  overflow-y:scroll;
+}
+.title-box:focus,textarea:focus{
+    border: 1.5px solid #F9C31B;
+}
+.notes-btns-box{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}

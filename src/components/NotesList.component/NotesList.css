@@ -1,0 +1,33 @@
+.notes-list-box{
+   width: 30vw;
+   /* min-width:400px; */
+   height:100%;
+   display: flex;
+   flex-direction: column;
+   /* overflow:hidden; */
+   border-right: 1px solid #fff;
+   padding: 25px 20px;
+   /* border: 2px solid green; */
+}
+
+.notes-list-header{
+    color: rgb(34, 34, 34);
+    font-size: 27px;
+    /* height:%; */
+    font-weight: 600;
+    position: fixed;
+    /* margin-bottom: 30px; */
+}
+.notes-list-items-box{
+    margin-top:50px;
+    height: 90%;
+    min-width: 400px;
+    list-style-type: none;
+     display: flex;
+     flex-direction: column;
+     gap:20px;
+     padding: 18px 0px;
+     position: fixed;   
+     overflow-y: scroll;
+     /* border: 1px solid red; */
+}

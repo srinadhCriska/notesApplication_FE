@@ -1,0 +1,28 @@
+.nav-button-styles{
+    color: rgb(29, 28, 28);    font-size:20px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+.custom-nav-button-styles{
+    color:#F9C31B;
+}
+
+.notes-button-styles{
+    /* width: 40px;
+    height: 20px; */
+    border: 1.5px solid #F9C31B;
+    background-color: transparent;
+    border-radius:23px;
+    font-size: 18px;
+    font-weight:600;
+    color: #F9C31B;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+.custom-notes-btn-styles{
+    background-color: #F9C31B;
+    /* border: none; */
+    color: #fff;
+}
