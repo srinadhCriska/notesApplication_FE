@@ -1,17 +1,18 @@
 .home-bg-container{
    background-color: #f5f2f2;
    width: 100vw;
-   height:calc(100vh - 9vh);
+   flex: 1;
+   /* min-height:calc(100vh - 9vh); */
    padding: 10px;
-   overflow-y: hidden;
-   position: fixed;
+   /* overflow-y: hidden; */
+   /* position: fixed; */
    /* border: solid 2px red; */
 }
 
 .notes-display-box{
    width: 100%;
-   min-height:90%;
+   flex: 1;  
    display: flex;
    border-top: 2px solid #fff; 
-   overflow: hidden; 
+   /* overflow: hidden;  */
 }

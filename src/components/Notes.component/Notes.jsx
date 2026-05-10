@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import {useState } from "react";
 import { ButtonsGroup } from "../../buttonsLayout/buttons.Layout";
 import { notesControlButtons } from "../../metadata/buttons.metadata";
 import { v4 as uuidv4 } from "uuid";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import "./Notes.styles.css";
 import { createNewNotesApiFunc } from "../../service/notesApiList";
 ButtonsGroup;
+
 export const NotesInputComponent = ({ stateUpdateFunc }) => {
   const [createNotesBtn, setCreateNotes] = useState(false);
   const [isCancelBtnClicked, setCancelBtn] = useState(false);
@@ -30,27 +31,38 @@ export const NotesInputComponent = ({ stateUpdateFunc }) => {
     setNotesContent(contentData);
   };
 
-  const generateDataObj = () => {
-    const id = uuidv4();
-    let notesData = {
-      id,
+  // const generateDataObj = () => {
+  //   const id = uuidv4();
+  //   let notesData = {
+  //     id,
+  //     title: notesTitle,
+  //     description: notesContent,
+  //   };
+  //   return notesData;
+  // };
+
+  const onClickSaveBtn = async () => {
+    let callApi = notesTitle.length > 0 && notesContent.length > 0;
+
+    let newNotesData = {
+      id:uuidv4(),
       title: notesTitle,
       description: notesContent,
     };
-    return notesData;
-  };
+    console.log("Save Clicked");
 
-  const onClickSaveBtn =async () => {
-    let callApi = notesTitle.length > 0 && notesContent.length > 0;
-    try{
-       callApi && setActiveBtn("save");
-       const dbResponse=await callApi && createNewNotesApiFunc(generateDataObj());
-       callApi && stateUpdateFunc((prev) => prev + 1);
-       toast.success("Successfully created new notes")
-    }
-    catch(err){
-        console.log("Error while creating new notes")
-        toast.error("Failed to create new notes")
+    try {
+      {
+        callApi && setActiveBtn("save");
+        const dbResponse =
+          (await callApi) && createNewNotesApiFunc(newNotesData);
+        console.log(dbResponse);
+        stateUpdateFunc((prev) => prev + 1);
+        callApi && toast.success("Successfully created new notes");
+      }
+    } catch (err) {
+      console.log("Error while creating new notes");
+      toast.error("Failed to create new notes");
     }
     setNotesTitle("");
     setNotesContent("");
@@ -65,21 +77,20 @@ export const NotesInputComponent = ({ stateUpdateFunc }) => {
   const onClickCancelBtn = () => {
     setActiveBtn("cancel");
     clearUpFunc();
-    setCreateNotes(false)
+    setCreateNotes(false);
   };
 
   const btnFuncsObj = {
     save: onClickSaveBtn,
     cancel: onClickCancelBtn,
   };
-  
-  const onClickCreateBtn=()=>{
-      setCreateNotes(true)
-  }
+
+  const onClickCreateBtn = () => {
+    setCreateNotes(true);
+  };
 
   //   console.log(btnFuncsObj)
-  return (
-    createNotesBtn? 
+  return createNotesBtn ? (
     <div className="create-notes-box">
       <h1 className="notes-title">New Note</h1>
       <input
@@ -104,15 +115,13 @@ export const NotesInputComponent = ({ stateUpdateFunc }) => {
           clickFuncs={btnFuncsObj}
         />
       </div>
-    </div>:
-          <div className="create-notes-box">
-            <div className="create-items-box" > 
-                 <LuCircleFadingPlus className="Logo" onClick={onClickCreateBtn}/>
-            <p className="create-text">New Note</p>
-            </div>
-           
-          </div>
-  
-
+    </div>
+  ) : (
+    <div className="create-notes-box">
+      <div className="create-items-box">
+        <LuCircleFadingPlus className="Logo" onClick={onClickCreateBtn} />
+        <p className="create-text">New Note</p>
+      </div>
+    </div>
   );
 };

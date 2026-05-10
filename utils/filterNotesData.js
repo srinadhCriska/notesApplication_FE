@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 
 export const filterNotesDataFunc = (
-  notesDataList,
-  activeBtnId,
-  isCalenderClicked,
-  calenderDate,
+      notesList,
+      activeDisplayBtn,
+      calenderDate,
+      searchText,
 ) => {
   // Comparing Dates Function
   const compareDatesFunc = (d1, d2) => {
@@ -20,14 +20,14 @@ export const filterNotesDataFunc = (
 
   // All list function
   const allNotesFunc = () => {
-    return notesDataList;
+    return notesList;
   };
 
   // Today list function
 
   const todayNotesFunc = () => {
     let todayDate = new Date();
-    let filteredList = notesDataList.filter((eachNote) => {
+    let filteredList = notesList.filter((eachNote) => {
       //   let eachNoteDate = formatDateFunc(eachNote.created_at);
       if (compareDatesFunc(todayDate, eachNote.created_at)) {
         return eachNote;
@@ -41,7 +41,7 @@ export const filterNotesDataFunc = (
   const yesterdayNotesFunc = () => {
     let todayDate = new Date();
     todayDate.setDate(todayDate.getDate() - 1);
-    let filteredList = notesDataList.filter((eachNote) => {
+    let filteredList = notesList.filter((eachNote) => {
       if (compareDatesFunc(todayDate, eachNote.created_at)) {
         return eachNote;
       }
@@ -52,7 +52,7 @@ export const filterNotesDataFunc = (
   // Calling calender based filtering func
 
   const calenderFilterFunc = () => {
-    let filteredList = notesDataList.filter((eachNote) => {
+    let filteredList = notesList.filter((eachNote) => {
       if (compareDatesFunc(calenderDate, eachNote.created_at)) {
         return eachNote;
       }
@@ -60,10 +60,22 @@ export const filterNotesDataFunc = (
     return filteredList;
   };
 
-  // Calling Static Buttons  based filtering function
+  //Filter the notesList based on the search text
 
-  const staticBtnFunc = () => {
-    switch (activeBtnId) {
+  const searchFilterFunc = () => {
+    let filteredList = notesList.filter((eachNote) => {
+      if (eachNote.title.toLowerCase() === searchText.toLowerCase()) {
+        return eachNote;
+      }
+    });
+
+    return filteredList;
+  };
+
+  // Calling appropriate filtering function
+
+  const fetchNotesListFunc = () => {
+    switch (activeDisplayBtn) {
       case "all":
         return allNotesFunc();
         break;
@@ -74,13 +86,13 @@ export const filterNotesDataFunc = (
       case "yesterday":
         return yesterdayNotesFunc();
         break;
+      case "calender":
+        return calenderFilterFunc();
+        break;
+      case "searchbar":
+        return searchFilterFunc()
+        break;
     }
-  };
-
-  // Calling the appropriate func
-
-  const fetchNotesListFunc = () => {
-    return isCalenderClicked ? calenderFilterFunc() : staticBtnFunc();
   };
 
   // Getting filteredData

@@ -9,7 +9,7 @@ export const ButtonComponent = (props) => {
       return <NotesButton {...props} />;
     case "notesCtrlBtn":
       return <NotesCtrlButton {...props} />;
-      case "notesEditBtn":
+    case "notesEditBtn":
       return <NotesEditButton {...props} />;
   }
 };
@@ -31,7 +31,7 @@ export const NavButton = (props) => {
 
 export const NotesButton = (props) => {
   const { actvBtn, btnClickFuncObj, btnId, btnDisplayText } = props;
-
+  
   const stylesBtn =
     actvBtn === btnId
       ? "notes-button-styles custom-notes-btn-styles"

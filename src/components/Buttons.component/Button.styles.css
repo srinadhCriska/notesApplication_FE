@@ -14,12 +14,12 @@
     height: 20px; */
     border: 1.5px solid #F9C31B;
     background-color: transparent;
-    border-radius:23px;
-    font-size: 18px;
+    border-radius:19px;
+    font-size: 15px;
     font-weight:600;
     color: #F9C31B;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 10px 17px;
 }
 .custom-notes-btn-styles{
     background-color: #F9C31B;

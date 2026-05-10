@@ -10,13 +10,11 @@ export const NotesDisBtnComponent = ({
   calnderInput,
 }) => {
   const [activeBtn, setActiveBtn] = useState("all");
-  const [showCalender, setCalenderStatus] = useState(false);
 
   const onClickCntrlBtn = (val) => {
     setActiveBtn(val);
     actvBtnFunc(val);
-    clndrBtnFunc(false)
-    setCalenderStatus(false)
+    clndrBtnFunc(false);
   };
 
   const getCalenderDate = (e) => {
@@ -25,19 +23,26 @@ export const NotesDisBtnComponent = ({
     calnderInput(calenderDate);
   };
 
+  // console.log("Calender Status in Display Comp", showCalender);
+
   const onClickCalender = () => {
-    setCalenderStatus(!showCalender);
+    setActiveBtn("calender");
+    actvBtnFunc("calender");
     clndrBtnFunc((prev) => !prev);
   };
-  const calenderStyles = showCalender
+  const calenderStyles = activeBtn==="calender"
     ? "calender-button-styles custom-calender-btn-styles"
     : "calender-button-styles";
+
 
   const btnFuncsObj = {
     all: onClickCntrlBtn,
     today: onClickCntrlBtn,
     yesterday: onClickCntrlBtn,
   };
+
+ 
+
   return (
     <div className="notes-display-controller-box">
       <div className="notes-controller-btns-box">
@@ -50,7 +55,7 @@ export const NotesDisBtnComponent = ({
       <button className={calenderStyles} onClick={onClickCalender}>
         Calender
       </button>
-      {showCalender && (
+      {activeBtn==="calender" && (
         <input
           onChange={getCalenderDate}
           className="calender-input"

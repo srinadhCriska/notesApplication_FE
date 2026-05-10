@@ -11,8 +11,7 @@ export const EachNotesComponent = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id, created_at, title, description, edited_time } = location.state;
-  const [isSaveBtnClicked, setSaveBtn] = useState(false);
-  const [isCancelBtnClicked, setCancelBtn] = useState(false);
+
   const [notesTitle, setNotesTitle] = useState(title);
   const [notesContent, setNotesContent] = useState(description);
   const [isBtnsDisable, setBtnsDisplay] = useState(true);
@@ -34,22 +33,28 @@ export const EachNotesComponent = () => {
     setNotesContent(contentData);
   };
 
-  const generateDataObj = () => {
+  // const generateDataObj = () => {
+  //   let notesData = {
+  //     id,
+  //     description: notesContent,
+  //     title: notesTitle,
+  //   };
+  //   return notesData;
+  // };
+
+  const onClickEditBtn = async () => {
+    let callApi = notesTitle.length > 0 && notesContent.length > 0;
     let notesData = {
       id,
       description: notesContent,
       title: notesTitle,
     };
-    return notesData;
-  };
-
-  const onClickEditBtn = async () => {
-    let callApi = notesTitle.length > 0 && notesContent.length > 0;
     try {
-      const dbResponse =
-        (await callApi) && updateNotesListApiFunc(generateDataObj());
-      callApi && setActiveBtn("edit");
-      toast.success("Successfully updated the notes");
+      {
+        callApi && (await updateNotesListApiFunc(notesData));
+        setActiveBtn("edit");
+        toast.success("Successfully edited the notes");
+      }
     } catch (err) {
       console.log("Error in the EachNotes in pages");
       toast.error("Failed to update the notes");
@@ -84,10 +89,10 @@ export const EachNotesComponent = () => {
   };
 
   let displayDateContent = !dateClicked
-    ? `Created: ${formatDateFunc(new Date(created_at))}`
+    ? `Created Time: ${formatDateFunc(new Date(created_at))}`
     : edited_time !== null
-      ? `Edited: ${formatDateFunc(new Date(edited_time))}`
-      : "Edited: NONE";
+      ? `Edited Time: ${formatDateFunc(new Date(edited_time))}`
+      : "Edited Time: Not yet edited";
 
   return (
     <div className="each-notes-bg-container">
